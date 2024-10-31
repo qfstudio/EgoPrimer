@@ -1,4 +1,5 @@
-﻿namespace EgoPrimer.ViewModels;
+﻿
+namespace EgoPrimer.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
