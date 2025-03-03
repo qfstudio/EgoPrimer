@@ -35,6 +35,14 @@ static class ServiceCollectionExtensions
 
 public partial class App : Application
 {
+    public App()
+    {
+        var collection = new ServiceCollection();
+        collection.AddCommonServices();
+
+        Provider = collection.BuildServiceProvider();
+    }
+
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -48,10 +56,6 @@ public partial class App : Application
         EnsureDirs();
         InitDatabases();
 
-        var collection = new ServiceCollection();
-        collection.AddCommonServices();
-
-        Provider = collection.BuildServiceProvider();
         var vm = Provider.GetRequiredService<MainViewModel>();
 
         switch (ApplicationLifetime)

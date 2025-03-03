@@ -15,8 +15,8 @@
         <Grid.ColumnDefinitions>*,Auto</Grid.ColumnDefinitions>
         <StackPanel>
             <views:NavigationBar Name="Navigation"></views:NavigationBar>
-            <ContentControl Name="Content"></ContentControl>
+            <ContentControl Name="Screen"></ContentControl>
         </StackPanel>
-        <views:ToolPanel Grid.Column="1" Name="Tool"></views:ToolPanel>
+        <views:ToolPanel Grid.Column="1" Name="ToolPanel"></views:ToolPanel>
     </Grid>
 </UserControl>

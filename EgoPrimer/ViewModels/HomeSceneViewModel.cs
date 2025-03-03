@@ -2,15 +2,7 @@
 
 namespace EgoPrimer.ViewModels;
 
-public class HomeSceneViewModel : ISceneVIewModel
+public class HomeSceneViewModel : ISceneViewModel
 {
-    public UserControl GetScene()
-    {
-        return new HomeSceneView();
-    }
-
-    public UserControl? GetToolPanel()
-    {
-        return null;
-    }
+    public string Name => "Home";
 }
