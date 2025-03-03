@@ -13,6 +13,14 @@ public class CoreContext : DbContext
             builder.UseNodaTime();
         });
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Focus>().OwnsOne(x => x.Metadata, b =>
+        {
+            b.ToJson();
+        });
+    }
 }
 
 public class EditionContext : DbContext

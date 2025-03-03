@@ -8,9 +8,9 @@ using Avalonia.Threading;
 
 namespace EgoPrimer.Views;
 
-public partial class SettingsView : UserControl
+public partial class SettingsScene : UserControl
 {
-    public SettingsView()
+    public SettingsScene()
     {
         InitializeComponent();
     }

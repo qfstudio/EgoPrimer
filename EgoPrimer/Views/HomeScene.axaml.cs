@@ -5,15 +5,15 @@ using Avalonia.Markup.Xaml;
 
 namespace EgoPrimer.Views;
 
-public partial class HomeView : UserControl
+public partial class HomeScene : UserControl
 {
-    public HomeView()
+    public HomeScene()
     {
         InitializeComponent();
     }
 
     private void Button_OnClick(object? sender, RoutedEventArgs e)
     {
-        Content = new SettingsView();
+        Content = new SettingsScene();
     }
 }

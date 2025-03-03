@@ -23,7 +23,7 @@ static class ServiceCollectionExtensions
         // db context
         collection.AddTransient<CoreContext>();
         collection.AddTransient<EditionContext>();
-
+        
         // view model
         collection.AddTransient<MainViewModel>();
 
@@ -87,8 +87,8 @@ public partial class App : Application
 
     private void InitConstants()
     {
-        string roamingFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        string appDataFolder = Path.Combine(roamingFolder, "EgoPrimer");
+        var roamingFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        var appDataFolder = Path.Combine(roamingFolder, "EgoPrimer");
 
         Constants.AppRoamingDir = appDataFolder;
     }

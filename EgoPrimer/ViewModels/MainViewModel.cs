@@ -21,6 +21,8 @@ public class MainViewModel : ViewModelBase
 
     public MainViewModel()
     {
+        Views.Push(new HomeScene());
+        
         this.WhenAnyValue(x => x.Views)
             .Select(x => x.Peek())
             .ObserveOn(RxApp.MainThreadScheduler)
