@@ -1,19 +1,29 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Reactive.Linq;
+using Avalonia;
 using Avalonia.Controls;
 using EgoPrimer.Views;
+using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 
 namespace EgoPrimer.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    private readonly Stack<ISceneViewModel> _scenes = new();
+    public ObservableCollection<ISceneViewModel> Scenes { get; } = new();
 
-    public MainViewModel()
+    private ObservableAsPropertyHelper<ISceneViewModel> _currentScene;
+    public ISceneViewModel CurrentScene => _currentScene.Value;
+
+    public MainViewModel(HomeSceneViewModel homeScene)
     {
+        Scenes.Add(homeScene);
 
+        _currentScene = this.WhenAnyValue(x => x.Scenes)
+            .Select(scenes => scenes[0])
+            .ToProperty(this, x => x.CurrentScene);
     }
 }

@@ -8,14 +8,27 @@
              x:Class="EgoPrimer.Views.MainView"
              x:DataType="vm:MainViewModel">
     <Design.DataContext>
-        <vm:MainViewModel />
+        <vm:MainViewModel>
+            <x:Arguments>
+                <vm:HomeSceneViewModel />
+            </x:Arguments>
+        </vm:MainViewModel>
     </Design.DataContext>
+
+    <UserControl.DataTemplates>
+        <DataTemplate DataType="vm:HomeSceneViewModel">
+            <views:HomeScene />
+        </DataTemplate>
+        <DataTemplate DataType="vm:SettingsSceneViewModel">
+            <views:SettingsScene />
+        </DataTemplate>
+    </UserControl.DataTemplates>
 
     <Grid>
         <Grid.ColumnDefinitions>*,Auto</Grid.ColumnDefinitions>
         <StackPanel>
             <views:NavigationBar Name="Navigation"></views:NavigationBar>
-            <ContentControl Name="Screen"></ContentControl>
+            <ContentControl Name="Screen" Content="{Binding CurrentScene}"></ContentControl>
         </StackPanel>
         <views:ToolPanel Grid.Column="1" Name="ToolPanel"></views:ToolPanel>
     </Grid>

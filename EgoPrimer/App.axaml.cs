@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Reflection;
 using Avalonia;
@@ -20,12 +21,14 @@ static class ServiceCollectionExtensions
 {
     public static void AddCommonServices(this IServiceCollection collection)
     {
-        // db context
+        // db contexts
         collection.AddTransient<CoreContext>();
         collection.AddTransient<EditionContext>();
         
-        // view model
+        // view models
         collection.AddTransient<MainViewModel>();
+        collection.AddTransient<HomeSceneViewModel>();
+        collection.AddTransient<SettingsSceneViewModel>();
 
         // views
         collection.AddTransient<MainWindow>();
@@ -42,6 +45,8 @@ public partial class App : Application
 
         Provider = collection.BuildServiceProvider();
     }
+
+    public new static App Current => (App)(Application.Current!);
 
     public override void Initialize()
     {
