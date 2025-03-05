@@ -2,7 +2,7 @@
 
 namespace EgoPrimer.ViewModels;
 
-public class HomeSceneViewModel : ISceneViewModel
+public class HomeSceneViewModel : SceneViewModelBase
 {
-    public string Name => "Home";
+    public override string Name => "Home";
 }
