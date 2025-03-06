@@ -14,6 +14,7 @@ using EgoPrimer.Views;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.Extensions.DependencyInjection;
+using Tomlyn;
 
 namespace EgoPrimer;
 
@@ -55,10 +56,14 @@ public partial class App : Application
 
     public ServiceProvider Provider { get; protected set; }
 
+    public AppSettings Settings => AppSettingsManager.CurrentSettings;
+
     public override void OnFrameworkInitializationCompleted()
     {
         InitConstants();
-        EnsureDirs();
+        EnsureLocalDataDirs();
+        InitSettings();
+        EnsureRoamingDataDirs();
         InitDatabases();
 
         var vm = Provider.GetRequiredService<MainViewModel>();
@@ -85,6 +90,11 @@ public partial class App : Application
         base.OnFrameworkInitializationCompleted();
     }
 
+    private void InitSettings()
+    {
+        AppSettingsManager.MakeSettingsAvailable();
+    }
+
     private void InitDatabases()
     {
         using var coreContext = new CoreContext();
@@ -97,14 +107,17 @@ public partial class App : Application
     private void InitConstants()
     {
         var roamingFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        var appDataFolder = Path.Combine(roamingFolder, "EgoPrimer");
+        var appRoamingDataFolder = Path.Combine(roamingFolder, "EgoPrimer");
 
-        Constants.AppRoamingDir = appDataFolder;
+        var localFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+        var appLocalDataFolder = Path.Combine(localFolder, "EgoPrimer");
+
+        Constants.AppRoamingDataDir = appRoamingDataFolder;
+        Constants.AppLocalDataDir = appLocalDataFolder;
     }
 
-    private void EnsureDirs()
+    private void EnsureDirs(string[] dirs)
     {
-        string[] dirs = [ Constants.AppRoamingDir, Constants.DbDir ];
         foreach (var dir in dirs)
         {
             if (!Directory.Exists(dir))
@@ -112,5 +125,17 @@ public partial class App : Application
                 Directory.CreateDirectory(dir);
             }
         }
+    }
+    
+    private void EnsureLocalDataDirs()
+    {
+        EnsureDirs([ Constants.AppLocalDataDir ]);
+    }
+    
+    private void EnsureRoamingDataDirs()
+    {
+        EnsureDirs([
+            Constants.AppRoamingDataDir, Constants.DbDir
+        ]);
     }
 }

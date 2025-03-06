@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
@@ -15,21 +16,35 @@ public partial class SettingsScene : UserControl
         InitializeComponent();
     }
 
-    private void Button_OnClick(object? sender, RoutedEventArgs e)
+    private void OpenFolderInExplorer(string folderPath)
     {
         var startInfo = new ProcessStartInfo()
         {
-            Arguments = Constants.AppRoamingDir,
+            Arguments = folderPath,
             FileName = "explorer.exe"
         };
         Process.Start(startInfo);
+    }
 
+    private void DisableButtonForShortInterval(Button button)
+    {
         Dispatcher.UIThread.InvokeAsync(async () =>
         {
-            var b = (Button)sender!;
-            b.IsEnabled = false;
+            button.IsEnabled = false;
             await Task.Delay(3000);
-            b.IsEnabled = true;
+            button.IsEnabled = true;
         });
+    }
+
+    private void OpenAppDataButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        OpenFolderInExplorer(Constants.AppRoamingDataDir);
+        DisableButtonForShortInterval((Button)sender!);
+    }
+
+    private void OpenLocalDataButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        OpenFolderInExplorer(Constants.AppLocalDataDir);
+        DisableButtonForShortInterval((Button)sender!);
     }
 }

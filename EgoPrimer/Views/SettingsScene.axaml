@@ -6,7 +6,8 @@
              x:Class="EgoPrimer.Views.SettingsScene">
     <ScrollViewer>
         <StackPanel>
-            <Button Click="Button_OnClick">Open AppData Folder</Button>
+            <Button Name="OpenAppDataButton" Click="OpenAppDataButton_OnClick">Open AppData Folder</Button>
+            <Button Name="OpenLocalDataButton" Click="OpenLocalDataButton_OnClick"></Button>
         </StackPanel>
     </ScrollViewer>
 </UserControl>
