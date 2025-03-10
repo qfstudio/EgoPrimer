@@ -1,19 +1,25 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
+﻿using Avalonia.Interactivity;
+using Avalonia.LogicalTree;
+using Avalonia.ReactiveUI;
+using Avalonia.VisualTree;
+using EgoPrimer.ViewModels;
 
 namespace EgoPrimer.Views;
 
-public partial class HomeScene : UserControl
+public partial class HomeScene : ReactiveUserControl<HomeSceneViewModel>
 {
     public HomeScene()
     {
         InitializeComponent();
     }
 
-    private void Button_OnClick(object? sender, RoutedEventArgs e)
+    private void OpenSettingsSceneButton_OnClick(object? sender, RoutedEventArgs e)
     {
-        Content = new SettingsScene();
+        MainView.Current?.NavigateTo(new SettingsSceneViewModel());
+    }
+
+    private void OpenFocusSceneButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        throw new System.NotImplementedException();
     }
 }

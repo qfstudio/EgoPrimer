@@ -1,6 +1,4 @@
-﻿using Avalonia.Controls;
-
-namespace EgoPrimer.ViewModels;
+﻿namespace EgoPrimer.ViewModels;
 
 public class HomeSceneViewModel : SceneViewModelBase
 {
