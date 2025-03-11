@@ -25,13 +25,12 @@ public class MainViewModel : ViewModelBase
     {
         Scenes.Add(homeScene);
 
-        _currentScene = this.WhenAnyValue(x => x.Scenes)
-            .Select(scenes => scenes.Last())
-            .ToProperty(this, x => x.CurrentScene);
-
-        // Observable.FromEventPattern<NotifyCollectionChangedEventArgs>(
-        //     handler => Scenes.CollectionChanged += (NotifyCollectionChangedEventHandler)handler,
-        //     handler => Scenes.CollectionChanged -= handler);
+        _currentScene = Observable.FromEvent<NotifyCollectionChangedEventHandler, NotifyCollectionChangedEventArgs>(
+                handler => (sender, e) => handler(e),
+                handler => Scenes.CollectionChanged += handler,
+                handler => Scenes.CollectionChanged -= handler)
+            .Select(_ => Scenes.Last())
+            .ToProperty(this, x => x.CurrentScene, Scenes.Last());
     }
 
     public void PushScene(ISceneViewModel vm)
