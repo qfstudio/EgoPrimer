@@ -8,8 +8,8 @@
         x:Class="EgoPrimer.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="EgoPrimer"
-        Width="400"
-        Height="300">
+        Width="540"
+        Height="360">
 
         <views:MainView />
 </Window>

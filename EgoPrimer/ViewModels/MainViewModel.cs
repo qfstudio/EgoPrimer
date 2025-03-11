@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reactive.Linq;
 using Avalonia;
 using Avalonia.Controls;
+using DynamicData;
 using DynamicData.Binding;
 using EgoPrimer.Views;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,7 +27,7 @@ public class MainViewModel : ViewModelBase
         Scenes.Add(homeScene);
 
         _currentScene = Observable.FromEvent<NotifyCollectionChangedEventHandler, NotifyCollectionChangedEventArgs>(
-                handler => (sender, e) => handler(e),
+                handler => (_, args) => handler(args),
                 handler => Scenes.CollectionChanged += handler,
                 handler => Scenes.CollectionChanged -= handler)
             .Select(_ => Scenes.Last())
@@ -36,5 +37,20 @@ public class MainViewModel : ViewModelBase
     public void PushScene(ISceneViewModel vm)
     {
         Scenes.Add(vm);
+    }
+
+    public void PopScene()
+    {
+        if (Scenes.Count < 2) return;
+
+        Scenes.RemoveAt(Scenes.Count - 1);
+    }
+
+    public void SwitchToScene(ISceneViewModel vm)
+    {
+        if (!Scenes.Contains(vm)) return;
+
+        var itemsToPop = Scenes.TakeLast(Scenes.Count - Scenes.IndexOf(vm) - 1);
+        Scenes.RemoveMany(itemsToPop);
     }
 }
