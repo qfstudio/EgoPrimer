@@ -1,16 +1,8 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Reactive.Linq;
-using Avalonia;
-using Avalonia.Controls;
 using DynamicData;
-using DynamicData.Binding;
-using EgoPrimer.Views;
-using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 
 namespace EgoPrimer.ViewModels;
@@ -21,11 +13,11 @@ public class MainViewModel : ViewModelBase
 
     private ObservableAsPropertyHelper<ISceneViewModel> _currentScene;
     public ISceneViewModel CurrentScene => _currentScene.Value;
-
+    
     public MainViewModel(HomeSceneViewModel homeScene)
     {
         Scenes.Add(homeScene);
-
+        
         _currentScene = Observable.FromEvent<NotifyCollectionChangedEventHandler, NotifyCollectionChangedEventArgs>(
                 handler => (_, args) => handler(args),
                 handler => Scenes.CollectionChanged += handler,
