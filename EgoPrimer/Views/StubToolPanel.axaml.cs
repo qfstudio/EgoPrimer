@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace EgoPrimer.Views;
 
-public partial class ToolPanel : UserControl
+public partial class StubToolPanel : UserControl
 {
-    public ToolPanel()
+    public StubToolPanel()
     {
         InitializeComponent();
     }

@@ -14,22 +14,36 @@
             </x:Arguments>
         </vm:MainViewModel>
     </Design.DataContext>
-
-    <UserControl.DataTemplates>
-        <DataTemplate DataType="vm:HomeSceneViewModel">
-            <views:HomeScene />
-        </DataTemplate>
-        <DataTemplate DataType="vm:SettingsSceneViewModel">
-            <views:SettingsScene />
-        </DataTemplate>
-    </UserControl.DataTemplates>
-
+    
     <Grid>
         <Grid.ColumnDefinitions>*,Auto</Grid.ColumnDefinitions>
+        
         <StackPanel>
             <views:NavigationBar Name="Navigation"></views:NavigationBar>
-            <ContentControl Name="Screen" Content="{Binding CurrentScene}"></ContentControl>
+            
+            <ContentControl Name="Screen" Content="{Binding CurrentScene}">
+                <ContentControl.DataTemplates>
+                    <DataTemplate DataType="vm:HomeSceneViewModel">
+                        <views:HomeScene />
+                    </DataTemplate>
+                    <DataTemplate DataType="vm:SettingsSceneViewModel">
+                        <views:SettingsScene />
+                    </DataTemplate>
+                </ContentControl.DataTemplates>
+            </ContentControl>
         </StackPanel>
-        <views:ToolPanel Grid.Column="1" Name="ToolPanel"></views:ToolPanel>
+        
+        <ContentControl 
+            Name="ToolPanel" 
+            Grid.Column="1" 
+            Content="{Binding CurrentScene}"
+            Width="88"
+            Background="LightBlue">
+            <ContentControl.DataTemplates>
+                <DataTemplate DataType="vm:ISceneViewModel">
+                    <views:StubToolPanel />
+                </DataTemplate>
+            </ContentControl.DataTemplates>
+        </ContentControl>
     </Grid>
 </UserControl>
