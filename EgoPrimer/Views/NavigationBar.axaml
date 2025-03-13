@@ -8,7 +8,15 @@
              x:DataType="vm:MainViewModel">
     <Grid Background="Aquamarine">
         <ItemsRepeater ItemsSource="{Binding Scenes}">
-
+            <ItemsRepeater.Layout>
+                <StackLayout Spacing="10" Orientation="Horizontal"></StackLayout>
+            </ItemsRepeater.Layout>
+            
+            <ItemsRepeater.ItemTemplate>
+                <DataTemplate>
+                    <Button Content="{Binding Name}"></Button>        
+                </DataTemplate>
+            </ItemsRepeater.ItemTemplate>
         </ItemsRepeater>
     </Grid>
 </UserControl>
