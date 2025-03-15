@@ -1,11 +1,12 @@
 ﻿
 using System.IO;
-using Avalonia.Platform;
 
 namespace EgoPrimer;
 
 public static class Constants
 {
+    public static string DataDirNameOverwrite { get; set; } = "";
+
     public static string AppRoamingDataDir { get; set; } = "";
 
     public static string AppLocalDataDir { get; set; } = "";

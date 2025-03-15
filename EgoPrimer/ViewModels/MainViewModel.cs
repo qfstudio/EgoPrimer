@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Linq;
 using DynamicData;
 using ReactiveUI;
@@ -13,7 +14,9 @@ public class MainViewModel : ViewModelBase
 
     private ObservableAsPropertyHelper<ISceneViewModel> _currentScene;
     public ISceneViewModel CurrentScene => _currentScene.Value;
-    
+
+    public ReactiveCommand<ISceneViewModel, Unit> RequestSwitchSceneCommand { get; }
+
     public MainViewModel(HomeSceneViewModel homeScene)
     {
         Scenes.Add(homeScene);
@@ -24,6 +27,8 @@ public class MainViewModel : ViewModelBase
                 handler => Scenes.CollectionChanged -= handler)
             .Select(_ => Scenes.Last())
             .ToProperty(this, x => x.CurrentScene, Scenes.Last());
+
+        RequestSwitchSceneCommand = ReactiveCommand.Create<ISceneViewModel>(SwitchToScene);
     }
 
     public void PushScene(ISceneViewModel vm)

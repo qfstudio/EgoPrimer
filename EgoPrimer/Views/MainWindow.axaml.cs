@@ -1,8 +1,9 @@
-using Avalonia.Controls;
+using Avalonia.ReactiveUI;
+using EgoPrimer.ViewModels;
 
 namespace EgoPrimer.Views;
 
-public partial class MainWindow : Window
+public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
 {
     public MainWindow()
     {

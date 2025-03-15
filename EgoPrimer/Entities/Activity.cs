@@ -8,5 +8,7 @@ public class Activity : EntityBase
 
     public Instant EndedAt { set; get; }
 
+    public string Description { set; get; } = string.Empty;
+
     public Focus? Focus { set; get; }
 }

@@ -1,20 +1,13 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
-using System.Reflection;
 using Avalonia;
-using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using EgoPrimer.Entities;
 using EgoPrimer.ViewModels;
 using EgoPrimer.Views;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.Extensions.DependencyInjection;
-using Tomlyn;
 
 namespace EgoPrimer;
 
@@ -27,6 +20,7 @@ static class ServiceCollectionExtensions
         collection.AddTransient<EditionContext>();
         
         // view models
+        collection.AddTransient<MainWindowViewModel>();
         collection.AddTransient<MainViewModel>();
         collection.AddTransient<HomeSceneViewModel>();
         collection.AddTransient<SettingsSceneViewModel>();
@@ -66,14 +60,12 @@ public partial class App : Application
         EnsureRoamingDataDirs();
         InitDatabases();
 
-        var vm = Provider.GetRequiredService<MainViewModel>();
-
         switch (ApplicationLifetime)
         {
             case IClassicDesktopStyleApplicationLifetime desktop:
                 WindowManager.Main = new MainWindow
                 {
-                    DataContext = vm,
+                    DataContext = Provider.GetRequiredService<MainWindowViewModel>(),
                     WindowStartupLocation = WindowStartupLocation.CenterOwner
                 };
                 desktop.MainWindow = WindowManager.Main;
@@ -82,7 +74,7 @@ public partial class App : Application
             case ISingleViewApplicationLifetime singleViewPlatform:
                 singleViewPlatform.MainView = new MainView
                 {
-                    DataContext = vm
+                    DataContext = Provider.GetRequiredService<MainViewModel>()
                 };
                 break;
         }
@@ -106,11 +98,21 @@ public partial class App : Application
 
     private void InitConstants()
     {
+        var dataDirName = Environment.GetEnvironmentVariable("EGO_PRIMER_DATA_DIR_NAME");
+        if (dataDirName != null)
+        {
+            Constants.DataDirNameOverwrite = dataDirName;
+        }
+        else
+        {
+            dataDirName ??= "EgoPrimer";
+        }
+
         var roamingFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        var appRoamingDataFolder = Path.Combine(roamingFolder, "EgoPrimer");
+        var appRoamingDataFolder = Path.Combine(roamingFolder, dataDirName);
 
         var localFolder = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        var appLocalDataFolder = Path.Combine(localFolder, "EgoPrimer");
+        var appLocalDataFolder = Path.Combine(localFolder, dataDirName);
 
         Constants.AppRoamingDataDir = appRoamingDataFolder;
         Constants.AppLocalDataDir = appLocalDataFolder;

@@ -1,17 +1,33 @@
-﻿using Avalonia.Styling;
+﻿using NodaTime;
 
 namespace EgoPrimer.Entities;
 
 public class Focus : EntityBase
 {
-    public string Title { set; get; } = "";
+    public string Brief { set; get; } = string.Empty;
 
-    public FocusMetadata Metadata { set; get; } = new();
+    public string Description { set; get; } = string.Empty;
+
+    public Instant? StartedAt { set; get; }
+
+    public Instant? EndedAt { set; get; }
+
+    public float? AvailablePoints { set; get; }
+
+    public float? GainedPoints { set; get; }
 }
 
-public class FocusMetadata
+public enum FocusDurationType
 {
-    public int Kudos { set; get; }
-    
-    public int TotalKudos { set; get; }
+    Focusing,
+    Interrupted
+}
+
+public class FocusDuration : EntityBase
+{
+    public Focus? Focus { set; get; }
+
+    public Instant StartedAt { set; get; }
+
+    public Instant? EndedAt { set; get; }
 }

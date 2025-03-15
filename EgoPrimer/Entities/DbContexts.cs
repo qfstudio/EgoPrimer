@@ -16,10 +16,6 @@ public class CoreContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Focus>().OwnsOne(x => x.Metadata, b =>
-        {
-            b.ToJson();
-        });
     }
 }
 

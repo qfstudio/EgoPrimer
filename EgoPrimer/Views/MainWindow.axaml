@@ -7,9 +7,10 @@
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="300"
         x:Class="EgoPrimer.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
-        Title="EgoPrimer"
+        Title="{Binding Title}"
         Width="540"
-        Height="360">
+        Height="360"
+        x:DataType="vm:MainWindowViewModel">
 
         <views:MainView />
 </Window>
