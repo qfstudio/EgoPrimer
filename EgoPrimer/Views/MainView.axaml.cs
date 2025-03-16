@@ -29,4 +29,12 @@ public partial class MainView : ReactiveUserControl<MainViewModel>
             mainVm.PushScene(vm);
         }
     }
+
+    public void NavigateBack()
+    {
+        if (DataContext is MainViewModel mainVm)
+        {
+            mainVm.PopScene();
+        }
+    }
 }

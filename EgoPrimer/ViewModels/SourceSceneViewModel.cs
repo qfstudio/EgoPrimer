@@ -35,13 +35,16 @@ public partial class SourceSceneViewModel : SceneViewModelBase
 
         UpdateLastCheckedPropertyCommand = ReactiveCommand.Create(() =>
         {
-            SelectedSource!.LastCheckedAt = SystemClock.Instance.GetCurrentInstant();
-
+            if (SelectedSource == null) return;
+            SelectedSource.LastCheckedAt = SystemClock.Instance.GetCurrentInstant();
+            SelectedSource.RaisePropertyChanged(nameof(SelectedSource.LastCheckedAt));
         }, AnyItemSelected);
 
         ClearLastCheckedPropertyCommand = ReactiveCommand.Create(() =>
         {
-            SelectedSource!.LastCheckedAt = null;
+            if (SelectedSource == null) return;
+            SelectedSource.LastCheckedAt = null;
+            SelectedSource.RaisePropertyChanged(nameof(SelectedSource.LastCheckedAt));
         }, AnyItemSelected);
 
         RemoveSelectedItemCommand = ReactiveCommand.Create(() =>
