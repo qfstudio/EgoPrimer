@@ -1,7 +1,5 @@
 ﻿using Avalonia.Interactivity;
-using Avalonia.LogicalTree;
 using Avalonia.ReactiveUI;
-using Avalonia.VisualTree;
 using EgoPrimer.ViewModels;
 
 namespace EgoPrimer.Views;
@@ -20,6 +18,46 @@ public partial class HomeScene : ReactiveUserControl<HomeSceneViewModel>
 
     private void OpenFocusSceneButton_OnClick(object? sender, RoutedEventArgs e)
     {
-        throw new System.NotImplementedException();
+        MainView.Current?.NavigateTo(new FocusSceneViewModel());
+    }
+
+    private void OpenCalendarButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        MainView.Current?.NavigateTo(new CalendarSceneViewModel());
+    }
+
+    private void OpenNextActionsSceneButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        MainView.Current?.NavigateTo(new NextActionsSceneViewModel());
+    }
+
+    private void OpenProjectsSceneButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        MainView.Current?.NavigateTo(new ProjectsSceneViewModel());
+    }
+
+    private void OpenInboxSceneButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        MainView.Current?.NavigateTo(new InboxSceneViewModel());
+    }
+
+    private void OpenWaitingSceneButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        MainView.Current?.NavigateTo(new WaitingSceneViewModel());
+    }
+
+    private void OpenIncubationSceneButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        MainView.Current?.NavigateTo(new IncubationSceneViewModel());
+    }
+
+    private void OpenCollectSceneButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        MainView.Current?.NavigateTo(new InboxSceneViewModel());
+    }
+
+    private void OpenSourceSceneButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        MainView.Current?.NavigateTo(new SourceSceneViewModel());
     }
 }

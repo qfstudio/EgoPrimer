@@ -5,6 +5,8 @@ namespace EgoPrimer.Entities;
 public class CoreContext : DbContext
 {
     public DbSet<Focus> Focuses { set; get; }
+    public DbSet<Diary> Diaries { set; get; }
+    public DbSet<Source> Sources { set; get; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

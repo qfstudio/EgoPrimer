@@ -12,3 +12,10 @@ public class Activity : EntityBase
 
     public Focus? Focus { set; get; }
 }
+
+public class ActivityType : EntityBase
+{
+    public string Name { set; get; } = string.Empty;
+
+    public string Description { set; get; } = string.Empty;
+}

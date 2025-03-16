@@ -5,11 +5,11 @@ namespace EgoPrimer;
 
 public static class Constants
 {
-    public static string DataDirNameOverwrite { get; set; } = "";
+    public static string DataDirNameOverwrite { get; set; } = string.Empty;
 
-    public static string AppRoamingDataDir { get; set; } = "";
+    public static string AppRoamingDataDir { get; set; } = string.Empty;
 
-    public static string AppLocalDataDir { get; set; } = "";
+    public static string AppLocalDataDir { get; set; } = string.Empty;
 
     public static string DbDir => Path.Combine(AppRoamingDataDir, "Databases");
 

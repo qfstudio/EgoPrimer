@@ -5,7 +5,9 @@ namespace EgoPrimer;
 
 public record AppSettings
 {
-    public string AppRoamingDataDir { set; get; } = "";
+    public string Schema { get; set; } = "v3.0.0";
+
+    public string AppRoamingDataDir { set; get; } = string.Empty;
 }
 
 public static class AppSettingsManager

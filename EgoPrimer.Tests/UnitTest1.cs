@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Reactive.Linq;
+using NodaTime;
 
 namespace EgoPrimer.Tests;
 
@@ -14,19 +15,14 @@ public class Tests
     [Test]
     public void Test1()
     {
-        ObservableCollection<int> collection = new();
-        
-        var d = Observable.FromEvent<System.Collections.Specialized.NotifyCollectionChangedEventHandler, 
-            System.Collections.Specialized.NotifyCollectionChangedEventArgs>(
-            handler => (sender, e) => handler(e),
-            handler => collection.CollectionChanged += handler,
-            handler => collection.CollectionChanged -= handler
-        ).Subscribe(args => Console.WriteLine(args.ToString()));
-        
-        collection.Add(1);
-        collection.Add(2);
-        
-        d.Dispose();
-        Assert.Pass();
+        var t1 = new LocalTime(3, 0);
+        var t2 = new LocalTime(1, 30);
+        var ts = Period.Between(t1, t2).ToDuration().TotalSeconds;
+        if (ts < 0)
+        {
+            ts = -ts;
+        }
+
+        var d = Duration.FromSeconds(ts);
     }
 }

@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace EgoPrimer.Views;
 
-public partial class StubToolPanel : UserControl
+public partial class DateTimeInfoView : UserControl
 {
-    public StubToolPanel()
+    public DateTimeInfoView()
     {
         InitializeComponent();
     }

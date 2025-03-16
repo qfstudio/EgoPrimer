@@ -16,32 +16,57 @@
     </Design.DataContext>
     
     <Grid>
+        <Grid.RowDefinitions>Auto,*</Grid.RowDefinitions>
         <Grid.ColumnDefinitions>*,Auto</Grid.ColumnDefinitions>
-        
-        <StackPanel>
-            <views:NavigationBar Name="Navigation"></views:NavigationBar>
+
+        <views:NavigationBar Grid.Row="0" Grid.Column="0" Name="Navigation"></views:NavigationBar>
             
-            <ContentControl Name="Screen" Content="{Binding CurrentScene}">
-                <ContentControl.DataTemplates>
-                    <DataTemplate DataType="vm:HomeSceneViewModel">
-                        <views:HomeScene />
-                    </DataTemplate>
-                    <DataTemplate DataType="vm:SettingsSceneViewModel">
-                        <views:SettingsScene />
-                    </DataTemplate>
-                </ContentControl.DataTemplates>
-            </ContentControl>
-        </StackPanel>
-        
+        <ContentControl Grid.Row="1" Grid.Column="0" Name="Screen" Content="{Binding CurrentScene}">
+            <ContentControl.DataTemplates>
+                <DataTemplate DataType="vm:HomeSceneViewModel">
+                    <views:HomeScene DataContext="{Binding}"/>
+                </DataTemplate>
+                <DataTemplate DataType="vm:SettingsSceneViewModel">
+                    <views:SettingsScene />
+                </DataTemplate>
+                <DataTemplate DataType="vm:CalendarSceneViewModel">
+                    <views:CalendarScene />
+                </DataTemplate>
+                <DataTemplate DataType="vm:InboxSceneViewModel">
+                    <views:InboxSceneView />
+                </DataTemplate>
+                <DataTemplate DataType="vm:FocusSceneViewModel">
+                    <views:FocusSceneView />
+                </DataTemplate>
+                <DataTemplate DataType="vm:SourceSceneViewModel">
+                    <views:SourceSceneView DataContext="{Binding}" />
+                </DataTemplate>
+                <DataTemplate DataType="vm:ISceneViewModel">
+                    <views:StubScene />
+                </DataTemplate>
+            </ContentControl.DataTemplates>
+        </ContentControl>
+
         <ContentControl 
-            Name="ToolPanel" 
-            Grid.Column="1" 
+            Name="ToolPanel"
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Grid.Column="1"
             Content="{Binding CurrentScene}"
             Width="88"
             Background="LightBlue">
             <ContentControl.DataTemplates>
+                <DataTemplate DataType="vm:HomeSceneViewModel">
+                    <views:HomeSceneToolPanel />
+                </DataTemplate>
+                <DataTemplate DataType="vm:CalendarSceneViewModel">
+                    <views:CalendarSceneToolPanel />
+                </DataTemplate>
+                <DataTemplate DataType="vm:SourceSceneViewModel">
+                    <views:SourceSceneToolPanel />
+                </DataTemplate>
                 <DataTemplate DataType="vm:ISceneViewModel">
-                    <views:StubToolPanel />
+                    <views:StubSceneToolPanel />
                 </DataTemplate>
             </ContentControl.DataTemplates>
         </ContentControl>

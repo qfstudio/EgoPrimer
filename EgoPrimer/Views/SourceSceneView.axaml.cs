@@ -2,9 +2,9 @@
 
 namespace EgoPrimer.Views;
 
-public partial class FocusClockWindow : Window
+public partial class SourceSceneView : UserControl
 {
-    public FocusClockWindow()
+    public SourceSceneView()
     {
         InitializeComponent();
     }

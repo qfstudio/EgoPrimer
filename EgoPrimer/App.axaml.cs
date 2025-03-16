@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using Avalonia;
 using Avalonia.Controls;
@@ -15,17 +14,18 @@ static class ServiceCollectionExtensions
 {
     public static void AddCommonServices(this IServiceCollection collection)
     {
-        // db contexts
+        // Database contexts
         collection.AddTransient<CoreContext>();
         collection.AddTransient<EditionContext>();
         
-        // view models
+        // View models
         collection.AddTransient<MainWindowViewModel>();
         collection.AddTransient<MainViewModel>();
         collection.AddTransient<HomeSceneViewModel>();
         collection.AddTransient<SettingsSceneViewModel>();
+        collection.AddTransient<SourceSceneViewModel>();
 
-        // views
+        // Views
         collection.AddTransient<MainWindow>();
         collection.AddTransient<MainView>();
     }
@@ -63,12 +63,11 @@ public partial class App : Application
         switch (ApplicationLifetime)
         {
             case IClassicDesktopStyleApplicationLifetime desktop:
-                WindowManager.Main = new MainWindow
+                desktop.MainWindow = new MainWindow
                 {
                     DataContext = Provider.GetRequiredService<MainWindowViewModel>(),
                     WindowStartupLocation = WindowStartupLocation.CenterOwner
                 };
-                desktop.MainWindow = WindowManager.Main;
                 break;
 
             case ISingleViewApplicationLifetime singleViewPlatform:
@@ -94,6 +93,7 @@ public partial class App : Application
 
         coreContext.Database.EnsureCreated();
         editionContext.Database.EnsureCreated();
+        Globals.DatabaseIsReady.Set();
     }
 
     private void InitConstants()

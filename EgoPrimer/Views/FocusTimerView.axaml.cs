@@ -3,9 +3,9 @@ using Avalonia.Input;
 
 namespace EgoPrimer.Views;
 
-public partial class FocusClockView : UserControl
+public partial class FocusTimerView : UserControl
 {
-    public FocusClockView()
+    public FocusTimerView()
     {
         InitializeComponent();
     }

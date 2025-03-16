@@ -8,6 +8,8 @@ public class Focus : EntityBase
 
     public string Description { set; get; } = string.Empty;
 
+    public ActivityType? ActivityType { set; get; }
+
     public Instant? StartedAt { set; get; }
 
     public Instant? EndedAt { set; get; }
