@@ -16,8 +16,9 @@ public partial class SourceScene : ReactiveUserControl<SourceSceneViewModel>
     }
 
     async Task DoEditSourceInteractionAsync(IInteractionContext<Source?, Source?> interaction)
-    {  
-        
+    {
+        SourceEditorSceneViewModel editor = new();
+        var output = await editor.EditSourceAsync(interaction.Input);
     }
     
 }

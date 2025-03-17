@@ -1,4 +1,5 @@
-﻿using EgoPrimer.Entities;
+﻿using System.Threading.Tasks;
+using EgoPrimer.Entities;
 using NodaTime;
 using ReactiveUI.SourceGenerators;
 
@@ -26,5 +27,18 @@ public partial class SourceEditorSceneViewModel: SceneViewModelBase
             CreatedAt = SystemClock.Instance.GetCurrentInstant(),
             LastCheckedAt = _sourceIsChecked ? SystemClock.Instance.GetCurrentInstant() : null,
         };
+    }
+
+    public void SetModel(Source? source)
+    {
+        SourceName = source.Name;
+        SourceDescription = source.Description;
+        SourceIsChecked = source.LastCheckedAt.HasValue;
+    }
+
+    public async Task<Source?> EditSourceAsync(Source? source)
+    {
+        // TODO
+        return source;
     }
 }
