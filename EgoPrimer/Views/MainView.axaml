@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:EgoPrimer"
              xmlns:views="clr-namespace:EgoPrimer.Views"
              xmlns:vm="clr-namespace:EgoPrimer.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
@@ -23,27 +24,7 @@
             
         <ContentControl Grid.Row="1" Grid.Column="0" Name="Screen" Content="{Binding CurrentScene}">
             <ContentControl.DataTemplates>
-                <DataTemplate DataType="vm:HomeSceneViewModel">
-                    <views:HomeScene DataContext="{Binding}"/>
-                </DataTemplate>
-                <!-- <DataTemplate DataType="vm:SettingsSceneViewModel"> -->
-                <!--     <views:SettingsScene /> -->
-                <!-- </DataTemplate> -->
-                <DataTemplate DataType="vm:CalendarSceneViewModel">
-                    <views:CalendarScene />
-                </DataTemplate>
-                <DataTemplate DataType="vm:InboxSceneViewModel">
-                    <views:InboxSceneView />
-                </DataTemplate>
-                <DataTemplate DataType="vm:FocusSceneViewModel">
-                    <views:FocusSceneView />
-                </DataTemplate>
-                <DataTemplate DataType="vm:SourceSceneViewModel">
-                    <views:SourceSceneView DataContext="{Binding}" />
-                </DataTemplate>
-                <DataTemplate DataType="vm:ISceneViewModel">
-                    <views:StubScene />
-                </DataTemplate>
+                <local:SceneLocator />
             </ContentControl.DataTemplates>
         </ContentControl>
 
@@ -56,18 +37,7 @@
             Width="88"
             Background="LightBlue">
             <ContentControl.DataTemplates>
-                <DataTemplate DataType="vm:HomeSceneViewModel">
-                    <views:HomeSceneToolPanel />
-                </DataTemplate>
-                <DataTemplate DataType="vm:CalendarSceneViewModel">
-                    <views:CalendarSceneToolPanel />
-                </DataTemplate>
-                <DataTemplate DataType="vm:SourceSceneViewModel">
-                    <views:SourceSceneToolPanel />
-                </DataTemplate>
-                <DataTemplate DataType="vm:ISceneViewModel">
-                    <views:StubSceneToolPanel />
-                </DataTemplate>
+                <local:ToolPanelLocator />
             </ContentControl.DataTemplates>
         </ContentControl>
     </Grid>

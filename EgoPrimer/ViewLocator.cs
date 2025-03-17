@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using EgoPrimer.ViewModels;
+using EgoPrimer.Views;
 
 namespace EgoPrimer;
 
@@ -30,20 +31,47 @@ public class ViewLocator : IDataTemplate
 
 public class SceneLocator : IDataTemplate
 {
-    public Type? TryGetType(object? param)
+    public virtual Type? GetCorrespondingControlType(SceneViewModelBase? vm)
     {
-        return param is ViewModelBase vm ? vm.GetType() : null;
+        if (vm is null)
+            return null;
+
+        var name = vm.GetType().FullName!
+            .Replace("SceneViewModel", "Scene", StringComparison.Ordinal)
+            .Replace(".ViewModels", ".Views", StringComparison.Ordinal);
+        return Type.GetType(name);
     }
     
-    public Control? Build(object? param)
+    public Control? Build(object? data)
     {
-        throw new NotImplementedException();
+        if (data is not SceneViewModelBase vm)
+            return new StubScene();
+
+        var type = GetCorrespondingControlType(vm);
+        if (type == null)
+            return new StubScene();
+
+        var control = (Control)Activator.CreateInstance(type)!;
+        control.DataContext = data;
+        return control;
     }
 
     public bool Match(object? data)
     {
-        throw new NotImplementedException();
+        return data is SceneViewModelBase;
     }
 }
 
+public class ToolPanelLocator : SceneLocator
+{
+    public override Type? GetCorrespondingControlType(SceneViewModelBase? vm)
+    {
+        if (vm is null)
+            return null;
 
+        var name = vm.GetType().FullName!
+            .Replace("SceneViewModel", "SceneToolPanel", StringComparison.Ordinal)
+            .Replace(".ViewModels", ".Views", StringComparison.Ordinal);
+        return Type.GetType(name);
+    }
+}

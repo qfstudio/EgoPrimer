@@ -6,9 +6,9 @@ using ReactiveUI;
 
 namespace EgoPrimer.Views;
 
-public partial class SourceSceneView : ReactiveUserControl<SourceSceneViewModel>
+public partial class SourceScene : ReactiveUserControl<SourceSceneViewModel>
 {
-    public SourceSceneView()
+    public SourceScene()
     {
         InitializeComponent();
 
