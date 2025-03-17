@@ -1,4 +1,3 @@
-using System;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
 using EgoPrimer.ViewModels;
@@ -28,3 +27,23 @@ public class ViewLocator : IDataTemplate
         return data is ViewModelBase;
     }
 }
+
+public class SceneLocator : IDataTemplate
+{
+    public Type? TryGetType(object? param)
+    {
+        return param is ViewModelBase vm ? vm.GetType() : null;
+    }
+    
+    public Control? Build(object? param)
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool Match(object? data)
+    {
+        throw new NotImplementedException();
+    }
+}
+
+

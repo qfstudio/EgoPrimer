@@ -26,9 +26,9 @@
                 <DataTemplate DataType="vm:HomeSceneViewModel">
                     <views:HomeScene DataContext="{Binding}"/>
                 </DataTemplate>
-                <DataTemplate DataType="vm:SettingsSceneViewModel">
-                    <views:SettingsScene />
-                </DataTemplate>
+                <!-- <DataTemplate DataType="vm:SettingsSceneViewModel"> -->
+                <!--     <views:SettingsScene /> -->
+                <!-- </DataTemplate> -->
                 <DataTemplate DataType="vm:CalendarSceneViewModel">
                     <views:CalendarScene />
                 </DataTemplate>

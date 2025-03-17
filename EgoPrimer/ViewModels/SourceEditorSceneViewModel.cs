@@ -1,6 +1,5 @@
 ﻿using EgoPrimer.Entities;
 using NodaTime;
-using ReactiveUI;
 using ReactiveUI.SourceGenerators;
 
 namespace EgoPrimer.ViewModels;
@@ -8,10 +7,10 @@ namespace EgoPrimer.ViewModels;
 public partial class SourceEditorSceneViewModel: SceneViewModelBase
 {
     [Reactive]
-    private string _sourceName;
+    private string _sourceName = string.Empty;
 
     [Reactive]
-    private string _sourceDescription;
+    private string _sourceDescription = string.Empty;
 
     [Reactive]
     private bool _sourceIsChecked;

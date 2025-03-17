@@ -1,6 +1,3 @@
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Reactive.Linq;
 using NodaTime;
 
 namespace EgoPrimer.Tests;

@@ -1,11 +1,23 @@
-﻿using Avalonia.Controls;
+﻿using System.Threading.Tasks;
+using Avalonia.ReactiveUI;
+using EgoPrimer.Entities;
+using EgoPrimer.ViewModels;
+using ReactiveUI;
 
 namespace EgoPrimer.Views;
 
-public partial class SourceSceneView : UserControl
+public partial class SourceSceneView : ReactiveUserControl<SourceSceneViewModel>
 {
     public SourceSceneView()
     {
         InitializeComponent();
+
+        this.WhenActivated(action => action(ViewModel!.EditSourceInteraction.RegisterHandler(DoEditSourceInteractionAsync)));
     }
+
+    async Task DoEditSourceInteractionAsync(IInteractionContext<Source?, Source?> interaction)
+    {  
+        
+    }
+    
 }

@@ -2,16 +2,20 @@
 using System.Reactive;
 using System.Reactive.Linq;
 using EgoPrimer.Entities;
+using Microsoft.Extensions.DependencyInjection;
 using NodaTime;
 using ReactiveUI;
 using ReactiveUI.SourceGenerators;
 
 namespace EgoPrimer.ViewModels;
 
-public partial class SourceSceneViewModel : SceneViewModelBase
+public partial class SourceSceneViewModel : SceneViewModelBase, IActivatableViewModel
 {
     public override string Name => "Sources";
 
+
+    public ViewModelActivator Activator { get; } = new();
+    
     public ObservableCollection<Source> Sources { get; } = [
         new () { Name = "QQ邮箱", LastCheckedAt = SystemClock.Instance.GetCurrentInstant() },
         new () { Name = "WizNote", LastCheckedAt = SystemClock.Instance.GetCurrentInstant() }
@@ -20,8 +24,16 @@ public partial class SourceSceneViewModel : SceneViewModelBase
     [Reactive]
     private Source? _selectedSource;
 
+    private CoreContext _coreContext;
+    
     public IObservable<bool> AnyItemSelected { get; }
 
+    public Interaction<Source?, Source?> EditSourceInteraction { get; } = new();
+    
+    public ReactiveCommand<Unit, Unit> AddSourceCommand { get; }
+    
+    public ReactiveCommand<Unit, Unit> EditSourceCommand { get; }
+    
     public ReactiveCommand<Unit, Unit> UpdateLastCheckedPropertyCommand { get; }
 
     public ReactiveCommand<Unit, Unit> ClearLastCheckedPropertyCommand { get; }
@@ -30,9 +42,17 @@ public partial class SourceSceneViewModel : SceneViewModelBase
 
     public SourceSceneViewModel()
     {
+        _coreContext = App.Current!.Provider.GetRequiredService<CoreContext>();
+        
         AnyItemSelected = this.WhenAnyValue(x => x.SelectedSource)
             .Select(x => x != null);
 
+        AddSourceCommand = ReactiveCommand.CreateFromTask(async () =>
+        {
+            if (SelectedSource == null) return;
+            await EditSourceInteraction.Handle(SelectedSource);
+        });
+        
         UpdateLastCheckedPropertyCommand = ReactiveCommand.Create(() =>
         {
             if (SelectedSource == null) return;
