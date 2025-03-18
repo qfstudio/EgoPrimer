@@ -46,7 +46,7 @@ public partial class MainView : ReactiveUserControl<MainViewModel>
             mainVm.PushScene(vm);
             while (mainVm.Scenes.Contains(vm))
             {
-                await vm.Deactivated;
+                await vm.Deactivated.FirstAsync();
             }
         }
     }

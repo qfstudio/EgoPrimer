@@ -31,6 +31,11 @@ public class ViewLocator : IDataTemplate
 
 public class SceneLocator : IDataTemplate
 {
+    public virtual Control? GetStubControl()
+    {
+        return new StubScene();
+    }
+
     public virtual Type? GetCorrespondingControlType(SceneViewModelBase? vm)
     {
         if (vm is null)
@@ -49,7 +54,7 @@ public class SceneLocator : IDataTemplate
 
         var type = GetCorrespondingControlType(vm);
         if (type == null)
-            return new StubScene();
+            return GetStubControl();
 
         var control = (Control)Activator.CreateInstance(type)!;
         control.DataContext = data;
@@ -62,8 +67,13 @@ public class SceneLocator : IDataTemplate
     }
 }
 
-public class ToolPanelLocator : SceneLocator
+public class SceneToolPanelLocator : SceneLocator
 {
+    public override Control? GetStubControl()
+    {
+        return new StubSceneToolPanel();
+    }
+
     public override Type? GetCorrespondingControlType(SceneViewModelBase? vm)
     {
         if (vm is null)

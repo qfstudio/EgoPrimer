@@ -1,7 +1,4 @@
-﻿using System.Threading.Tasks;
-using Avalonia.Controls;
-using Avalonia.ReactiveUI;
-using EgoPrimer.Entities;
+﻿using Avalonia.ReactiveUI;
 using EgoPrimer.ViewModels;
 
 namespace EgoPrimer.Views;

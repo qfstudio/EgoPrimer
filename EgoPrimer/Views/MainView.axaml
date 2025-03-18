@@ -37,7 +37,7 @@
             Width="88"
             Background="LightBlue">
             <ContentControl.DataTemplates>
-                <local:ToolPanelLocator />
+                <local:SceneToolPanelLocator />
             </ContentControl.DataTemplates>
         </ContentControl>
     </Grid>

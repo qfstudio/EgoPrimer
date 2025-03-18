@@ -35,7 +35,7 @@ public partial class SourceEditorSceneViewModel: SceneViewModelBase
             }
         }
     }
-    
+
     public Source? GetModel()
     {
         return _model;

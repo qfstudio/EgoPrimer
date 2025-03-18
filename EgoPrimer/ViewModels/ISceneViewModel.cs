@@ -30,8 +30,12 @@ public abstract class SceneViewModelBase : ViewModelBase, ISceneViewModel, IActi
     {
         this.WhenActivated(disposables =>
         {
-            _activated.OnNext(new Unit());
-            Disposable.Create(() => _deactivated.OnNext(new Unit())).DisposeWith(disposables);
+            _activated.OnNext(Unit.Default);
+
+            Disposable.Create(() =>
+            {
+                _deactivated.OnNext(Unit.Default);
+            }).DisposeWith(disposables);
         });
     }
 }
