@@ -9,12 +9,9 @@ using ReactiveUI.SourceGenerators;
 
 namespace EgoPrimer.ViewModels;
 
-public partial class SourceSceneViewModel : SceneViewModelBase, IActivatableViewModel
+public partial class SourceSceneViewModel : SceneViewModelBase
 {
     public override string Name => "Sources";
-
-
-    public ViewModelActivator Activator { get; } = new();
     
     public ObservableCollection<Source> Sources { get; } = [
         new () { Name = "QQ邮箱", LastCheckedAt = SystemClock.Instance.GetCurrentInstant() },
@@ -27,7 +24,7 @@ public partial class SourceSceneViewModel : SceneViewModelBase, IActivatableView
     private CoreContext _coreContext;
     
     public IObservable<bool> AnyItemSelected { get; }
-
+    
     public Interaction<Source?, Source?> EditSourceInteraction { get; } = new();
     
     public ReactiveCommand<Unit, Unit> AddSourceCommand { get; }
@@ -49,9 +46,14 @@ public partial class SourceSceneViewModel : SceneViewModelBase, IActivatableView
 
         AddSourceCommand = ReactiveCommand.CreateFromTask(async () =>
         {
+            await EditSourceInteraction.Handle(null);
+        });
+
+        EditSourceCommand = ReactiveCommand.CreateFromTask(async () =>
+        {
             if (SelectedSource == null) return;
             await EditSourceInteraction.Handle(SelectedSource);
-        });
+        }, AnyItemSelected);
         
         UpdateLastCheckedPropertyCommand = ReactiveCommand.Create(() =>
         {

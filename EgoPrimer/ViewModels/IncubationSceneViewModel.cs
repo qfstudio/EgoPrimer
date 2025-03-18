@@ -1,6 +1,6 @@
 ﻿namespace EgoPrimer.ViewModels;
 
-public class IncubationSceneViewModel : ISceneViewModel
+public class IncubationSceneViewModel : SceneViewModelBase
 {
-    public string Name => "Someday/Maybe";
+    public override string Name => "Someday/Maybe";
 }

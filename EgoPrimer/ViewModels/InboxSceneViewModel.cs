@@ -1,6 +1,6 @@
 ﻿namespace EgoPrimer.ViewModels;
 
-public class InboxSceneViewModel: ISceneViewModel
+public class InboxSceneViewModel: SceneViewModelBase
 {
-    public string Name => "Inbox";
+    public override string Name => "Inbox";
 }

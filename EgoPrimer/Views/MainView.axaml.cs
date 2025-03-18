@@ -1,4 +1,5 @@
 using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using Avalonia.ReactiveUI;
 using EgoPrimer.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,4 +38,17 @@ public partial class MainView : ReactiveUserControl<MainViewModel>
             mainVm.PopScene();
         }
     }
+    
+    public async Task ShowScene(ISceneViewModel vm)
+    {
+        if (DataContext is MainViewModel mainVm)
+        {
+            mainVm.PushScene(vm);
+            while (mainVm.Scenes.Contains(vm))
+            {
+                await vm.Deactivated;
+            }
+        }
+    }
+    
 }

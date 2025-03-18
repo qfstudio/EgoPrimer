@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Reactive.Disposables;
+using System.Threading.Tasks;
 using Avalonia.ReactiveUI;
 using EgoPrimer.Entities;
 using EgoPrimer.ViewModels;
@@ -12,13 +13,16 @@ public partial class SourceScene : ReactiveUserControl<SourceSceneViewModel>
     {
         InitializeComponent();
 
-        this.WhenActivated(action => action(ViewModel!.EditSourceInteraction.RegisterHandler(DoEditSourceInteractionAsync)));
+        this.WhenActivated(disposables =>
+        {
+            ViewModel!.EditSourceInteraction.RegisterHandler(DoEditSourceInteraction).DisposeWith(disposables);
+        });
     }
 
-    async Task DoEditSourceInteractionAsync(IInteractionContext<Source?, Source?> interaction)
+    private static async Task DoEditSourceInteraction(IInteractionContext<Source?, Source?> context)
     {
-        SourceEditorSceneViewModel editor = new();
-        var output = await editor.EditSourceAsync(interaction.Input);
+        var editor = new SourceEditorSceneViewModel();
+        await MainView.Current!.ShowScene(editor);
+        context.SetOutput(editor.GetModel());
     }
-    
 }

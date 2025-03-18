@@ -1,12 +1,14 @@
-﻿using System.Threading.Tasks;
-using EgoPrimer.Entities;
+﻿using EgoPrimer.Entities;
 using NodaTime;
+using ReactiveUI;
 using ReactiveUI.SourceGenerators;
 
 namespace EgoPrimer.ViewModels;
 
 public partial class SourceEditorSceneViewModel: SceneViewModelBase
 {
+    public override string Name => "Source Editor";
+    
     [Reactive]
     private string _sourceName = string.Empty;
 
@@ -16,29 +18,34 @@ public partial class SourceEditorSceneViewModel: SceneViewModelBase
     [Reactive]
     private bool _sourceIsChecked;
 
-    public override string Name => "Source Editor";
+    private Source? _model;
 
-    public Source GetModel()
+    public Source? Model
     {
-        return new Source()
+        get => _model;
+        set
         {
-            Name = _sourceName,
-            Description = _sourceDescription,
-            CreatedAt = SystemClock.Instance.GetCurrentInstant(),
-            LastCheckedAt = _sourceIsChecked ? SystemClock.Instance.GetCurrentInstant() : null,
-        };
+            this.RaiseAndSetIfChanged(ref _model, value);
+
+            if (value != null)
+            {
+                SourceName = value.Name;
+                SourceDescription = value.Description;
+                SourceIsChecked = value.LastCheckedAt.HasValue;
+            }
+        }
+    }
+    
+    public Source? GetModel()
+    {
+        return _model;
     }
 
-    public void SetModel(Source? source)
+    private void UpdateModel()
     {
-        SourceName = source.Name;
-        SourceDescription = source.Description;
-        SourceIsChecked = source.LastCheckedAt.HasValue;
-    }
-
-    public async Task<Source?> EditSourceAsync(Source? source)
-    {
-        // TODO
-        return source;
+        _model ??= new Source();
+        _model.Name = SourceName;
+        _model.Description = SourceDescription;
+        _model.LastCheckedAt = SourceIsChecked ? SystemClock.Instance.GetCurrentInstant() : null;
     }
 }
