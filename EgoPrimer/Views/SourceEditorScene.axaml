@@ -8,7 +8,7 @@
              x:DataType="vm:SourceEditorSceneViewModel">
     <StackPanel>
         <Label>Name</Label>
-        <TextBox Text="{Binding  SourceName}" />
+        <TextBox Text="{Binding SourceName}" />
         <Label>Description</Label>
         <TextBox Text="{Binding SourceDescription}" />
         <CheckBox IsChecked="{Binding SourceIsChecked}">Checked</CheckBox>
