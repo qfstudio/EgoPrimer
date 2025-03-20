@@ -60,4 +60,9 @@ public partial class HomeScene : ReactiveUserControl<HomeSceneViewModel>
     {
         MainView.Current?.NavigateTo(new SourceSceneViewModel());
     }
+
+    private void OpenChronicleSceneButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        MainView.Current?.NavigateTo(new ChronicleSceneViewModel());
+    }
 }

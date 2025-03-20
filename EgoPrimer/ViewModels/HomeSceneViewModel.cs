@@ -1,6 +1,11 @@
-﻿namespace EgoPrimer.ViewModels;
+﻿using ReactiveUI.SourceGenerators;
 
-public class HomeSceneViewModel : SceneViewModelBase
+namespace EgoPrimer.ViewModels;
+
+public partial class HomeSceneViewModel : SceneViewModelBase
 {
     public override string Name => "Home";
+
+    [Reactive]
+    private int _selectedTabIndex = 0;
 }
