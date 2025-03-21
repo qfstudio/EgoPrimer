@@ -1,5 +1,4 @@
 ﻿using System.Reactive.Disposables;
-using System.Threading.Tasks;
 using Avalonia.ReactiveUI;
 using EgoPrimer.Entities;
 using EgoPrimer.ViewModels;

@@ -12,5 +12,9 @@
         <Label>Description</Label>
         <TextBox Text="{Binding SourceDescription}" />
         <CheckBox IsChecked="{Binding SourceIsChecked}">Checked</CheckBox>
+        <StackPanel>
+            <Button>Confirm</Button>
+            <Button>Cancel</Button>
+        </StackPanel>
     </StackPanel>
 </UserControl>
