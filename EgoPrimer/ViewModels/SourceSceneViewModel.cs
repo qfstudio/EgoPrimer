@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Reactive;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using EgoPrimer.Entities;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +16,9 @@ public partial class SourceSceneViewModel : SceneViewModelBase
     
     public ObservableCollection<Source> Sources { get; } = [
         new () { Name = "QQ邮箱", LastCheckedAt = SystemClock.Instance.GetCurrentInstant() },
-        new () { Name = "WizNote", LastCheckedAt = SystemClock.Instance.GetCurrentInstant() }
+        new () { Name = "WizNote", LastCheckedAt = SystemClock.Instance.GetCurrentInstant() },
+        new () { Name = "Hotmail", LastCheckedAt = SystemClock.Instance.GetCurrentInstant() },
+        new () { Name = "Wechat", LastCheckedAt = SystemClock.Instance.GetCurrentInstant() }
     ];
 
     [Reactive]
@@ -40,7 +43,7 @@ public partial class SourceSceneViewModel : SceneViewModelBase
     public SourceSceneViewModel()
     {
         _coreContext = App.Current!.Provider.GetRequiredService<CoreContext>();
-        
+
         AnyItemSelected = this.WhenAnyValue(x => x.SelectedSource)
             .Select(x => x != null);
 

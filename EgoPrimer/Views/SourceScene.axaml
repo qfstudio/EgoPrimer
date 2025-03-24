@@ -10,7 +10,8 @@
               ItemsSource="{Binding Sources}"
               IsReadOnly="True"
               CanUserSortColumns="True"
-              SelectedItem="{Binding SelectedSource}">
+              SelectionMode="Single"
+              SelectedItem="{Binding SelectedSource, Mode=OneWayToSource}">
         <DataGrid.Columns>
             <DataGridTextColumn Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
             <DataGridTextColumn Header="Last Checked" Binding="{Binding LastCheckedAt}"></DataGridTextColumn>

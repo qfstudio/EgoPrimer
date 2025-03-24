@@ -57,7 +57,7 @@ public class SceneLocator : IDataTemplate
             return GetStubControl();
 
         var control = (Control)Activator.CreateInstance(type)!;
-        control.DataContext = data;
+        control.DataContext = vm;
         return control;
     }
 

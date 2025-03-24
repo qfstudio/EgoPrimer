@@ -18,10 +18,13 @@ public partial class SourceScene : ReactiveUserControl<SourceSceneViewModel>
         });
     }
 
-    private static async Task DoEditSourceInteraction(IInteractionContext<Source?, Source?> context)
+    private async Task DoEditSourceInteraction(IInteractionContext<Source?, Source?> context)
     {
-        var editor = new SourceEditorSceneViewModel();
-        await MainView.Current!.ShowScene(editor);
+        var editor = new SourceEditorSceneViewModel
+        {
+            Model = context.Input
+        };
+        await this.ShowScene(editor);
         context.SetOutput(editor.GetModel());
     }
 }

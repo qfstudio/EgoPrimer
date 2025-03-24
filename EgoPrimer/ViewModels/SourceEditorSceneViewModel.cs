@@ -1,4 +1,5 @@
-﻿using EgoPrimer.Entities;
+﻿using System.Reactive;
+using EgoPrimer.Entities;
 using NodaTime;
 using ReactiveUI;
 using ReactiveUI.SourceGenerators;
@@ -36,16 +37,25 @@ public partial class SourceEditorSceneViewModel: SceneViewModelBase
         }
     }
 
+    public ReactiveCommand<Unit, Unit> ConfirmEdition { get; }
+
+    public ReactiveCommand<Unit, Unit> DiscardEdition { get; }
+
     public Source? GetModel()
     {
         return _model;
     }
 
-    private void UpdateModel()
+    public SourceEditorSceneViewModel()
     {
-        _model ??= new Source();
-        _model.Name = SourceName;
-        _model.Description = SourceDescription;
-        _model.LastCheckedAt = SourceIsChecked ? SystemClock.Instance.GetCurrentInstant() : null;
+        ConfirmEdition = ReactiveCommand.Create(() =>
+        {
+            _model ??= new Source();
+            _model.Name = _sourceName;
+            _model.Description = _sourceDescription;
+            _model.LastCheckedAt = _sourceIsChecked ? SystemClock.Instance.GetCurrentInstant() : null;
+        });
+
+        DiscardEdition = ReactiveCommand.Create(() => {});
     }
 }
