@@ -6,6 +6,7 @@ using Avalonia.Markup.Xaml;
 using EgoPrimer.Entities;
 using EgoPrimer.ViewModels;
 using EgoPrimer.Views;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EgoPrimer;
@@ -91,8 +92,17 @@ public partial class App : Application
         using var coreContext = new CoreContext();
         using var editionContext = new EditionContext();
 
-        coreContext.Database.EnsureCreated();
-        editionContext.Database.EnsureCreated();
+        try
+        {
+            Task.WaitAll(coreContext.Database.MigrateAsync(), editionContext.Database.MigrateAsync());
+        }
+        catch (AggregateException ex)
+        {
+            Console.Error.WriteLine(ex.ToString());
+            Console.Error.WriteLine($"Errored handling local database, Core={Constants.CoreDbPath} and Edition={Constants.EditionDbPath}");
+            throw;
+        }
+
         Globals.DatabaseIsReady.Set();
     }
 
