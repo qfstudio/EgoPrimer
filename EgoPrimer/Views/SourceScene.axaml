@@ -13,8 +13,8 @@
               SelectionMode="Single"
               SelectedItem="{Binding SelectedSource, Mode=OneWayToSource}">
         <DataGrid.Columns>
-            <DataGridTextColumn Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
-            <DataGridTextColumn Header="Last Checked" Binding="{Binding LastCheckedAt}"></DataGridTextColumn>
+            <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+            <DataGridTextColumn Header="Last Checked" Binding="{Binding LastCheckedAt}" />
         </DataGrid.Columns>
     </DataGrid>
 </UserControl>

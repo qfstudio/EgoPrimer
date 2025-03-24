@@ -47,6 +47,8 @@ public partial class SourceSceneViewModel : SceneViewModelBase
         AnyItemSelected = this.WhenAnyValue(x => x.SelectedSource)
             .Select(x => x != null);
 
+        AnyItemSelected.Subscribe(x => Console.WriteLine($"AnyItemSelected: {x}, SelectedSource: {SelectedSource?.Name}"));
+
         AddSourceCommand = ReactiveCommand.CreateFromTask(async () =>
         {
             await EditSourceInteraction.Handle(null);
