@@ -1,8 +1,13 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using Avalonia.Threading;
+using DynamicData;
 using EgoPrimer.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using NodaTime;
 using ReactiveUI;
@@ -13,13 +18,8 @@ namespace EgoPrimer.ViewModels;
 public partial class SourceSceneViewModel : SceneViewModelBase
 {
     public override string Name => "Sources";
-    
-    public ObservableCollection<Source> Sources { get; } = [
-        new () { Name = "QQ邮箱", LastCheckedAt = SystemClock.Instance.GetCurrentInstant() },
-        new () { Name = "WizNote", LastCheckedAt = SystemClock.Instance.GetCurrentInstant() },
-        new () { Name = "Hotmail", LastCheckedAt = SystemClock.Instance.GetCurrentInstant() },
-        new () { Name = "Wechat", LastCheckedAt = SystemClock.Instance.GetCurrentInstant() }
-    ];
+
+    public ObservableCollection<Source> Sources { get; } = [];
 
     [Reactive]
     private Source? _selectedSource;
@@ -42,7 +42,7 @@ public partial class SourceSceneViewModel : SceneViewModelBase
 
     public SourceSceneViewModel()
     {
-        _coreContext = App.Current!.Provider.GetRequiredService<CoreContext>();
+        _coreContext = new CoreContext();
 
         AnyItemSelected = this.WhenAnyValue(x => x.SelectedSource)
             .Select(x => x != null);
@@ -51,13 +51,19 @@ public partial class SourceSceneViewModel : SceneViewModelBase
 
         AddSourceCommand = ReactiveCommand.CreateFromTask(async () =>
         {
-            await EditSourceInteraction.Handle(null);
+            var source = await EditSourceInteraction.Handle(null);
+            if (source != null)
+            {
+                _coreContext.Add(source);
+                _coreContext.SaveChanges();
+            }
         });
 
         EditSourceCommand = ReactiveCommand.CreateFromTask(async () =>
         {
             if (SelectedSource == null) return;
             await EditSourceInteraction.Handle(SelectedSource);
+            _coreContext.SaveChanges();
         }, AnyItemSelected);
         
         UpdateLastCheckedPropertyCommand = ReactiveCommand.Create(() =>
@@ -79,5 +85,13 @@ public partial class SourceSceneViewModel : SceneViewModelBase
             Sources.Remove(SelectedSource!);
             SelectedSource = null;
         }, AnyItemSelected);
+
+        this.WhenActivated(d =>
+        {
+            Sources.Clear();
+            Sources.AddRange(_coreContext.Sources.ToList());
+
+            d(Disposable.Empty);
+        });
     }
 }
