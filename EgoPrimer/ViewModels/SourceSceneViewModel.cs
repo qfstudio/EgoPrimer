@@ -47,8 +47,6 @@ public partial class SourceSceneViewModel : SceneViewModelBase
         AnyItemSelected = this.WhenAnyValue(x => x.SelectedSource)
             .Select(x => x != null);
 
-        AnyItemSelected.Subscribe(x => Console.WriteLine($"AnyItemSelected: {x}, SelectedSource: {SelectedSource?.Name}"));
-
         AddSourceCommand = ReactiveCommand.CreateFromTask(async () =>
         {
             var source = await EditSourceInteraction.Handle(null);
@@ -62,6 +60,7 @@ public partial class SourceSceneViewModel : SceneViewModelBase
         EditSourceCommand = ReactiveCommand.CreateFromTask(async () =>
         {
             if (SelectedSource == null) return;
+
             await EditSourceInteraction.Handle(SelectedSource);
             _coreContext.SaveChanges();
         }, AnyItemSelected);
@@ -69,27 +68,42 @@ public partial class SourceSceneViewModel : SceneViewModelBase
         UpdateLastCheckedPropertyCommand = ReactiveCommand.Create(() =>
         {
             if (SelectedSource == null) return;
+
             SelectedSource.LastCheckedAt = SystemClock.Instance.GetCurrentInstant();
+            _coreContext.SaveChanges();
             SelectedSource.RaisePropertyChanged(nameof(SelectedSource.LastCheckedAt));
         }, AnyItemSelected);
 
         ClearLastCheckedPropertyCommand = ReactiveCommand.Create(() =>
         {
             if (SelectedSource == null) return;
+
             SelectedSource.LastCheckedAt = null;
+            _coreContext.SaveChanges();
             SelectedSource.RaisePropertyChanged(nameof(SelectedSource.LastCheckedAt));
         }, AnyItemSelected);
 
         RemoveSelectedItemCommand = ReactiveCommand.Create(() =>
         {
+            if (SelectedSource == null) return;
+
             Sources.Remove(SelectedSource!);
+            _coreContext.Remove(SelectedSource);
             SelectedSource = null;
         }, AnyItemSelected);
 
         this.WhenActivated(d =>
         {
-            Sources.Clear();
-            Sources.AddRange(_coreContext.Sources.ToList());
+            Task.Run(async () =>
+            {
+                var sources = await _coreContext.Sources.OrderByDescending(x => x.LastCheckedAt).ToListAsync();
+
+                Observable.Return(sources).ObserveOn(RxApp.MainThreadScheduler).Subscribe(x =>
+                {
+                    Sources.Clear();
+                    Sources.AddRange(x);
+                });
+            });
 
             d(Disposable.Empty);
         });
