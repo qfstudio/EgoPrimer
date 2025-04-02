@@ -5,9 +5,11 @@ namespace EgoPrimer;
 
 public record AppSettings
 {
-    public string Schema { get; set; } = "v3.0.0";
+    public string Schema { get; set; } = "v3.0.1";
 
     public string AppRoamingDataDir { set; get; } = string.Empty;
+
+    public bool DisplayTimezoneInDatetimeString { get; set; } = false;
 }
 
 public static class AppSettingsManager

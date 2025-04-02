@@ -13,7 +13,15 @@ public class InstantToStringConverter : IValueConverter
         {
             var systemZone = DateTimeZoneProviders.Tzdb.GetSystemDefault();
             var zonedDateTime = instant.InZone(systemZone);
-            var pattern = ZonedDateTimePattern.CreateWithInvariantCulture("yyyy-MM-dd HH:mm:ss zzz", DateTimeZoneProviders.Tzdb);
+
+            var displayTimezone = AppSettingsManager.CurrentSettings.DisplayTimezoneInDatetimeString;
+            var patternString = "yyyy-MM-dd HH:mm:ss";
+            if (displayTimezone)
+            {
+                patternString += " o<+HH:mm>";
+            }
+            
+            var pattern = ZonedDateTimePattern.CreateWithInvariantCulture(patternString, DateTimeZoneProviders.Tzdb);
             return pattern.Format(zonedDateTime);
         }
 
@@ -22,6 +30,6 @@ public class InstantToStringConverter : IValueConverter
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
-        throw new NotImplementedException();
+        throw new NotSupportedException();
     }
 }

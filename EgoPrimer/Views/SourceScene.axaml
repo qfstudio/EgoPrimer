@@ -3,9 +3,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:EgoPrimer.ViewModels"
+             xmlns:views="clr-namespace:EgoPrimer.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="EgoPrimer.Views.SourceScene"
              x:DataType="vm:SourceSceneViewModel">
+    <UserControl.Resources>
+        <views:InstantToStringConverter x:Key="InstantToStringConverter" />
+    </UserControl.Resources>         
+             
     <DataGrid Name="SourceDataGrid"
               ItemsSource="{Binding Sources}"
               IsReadOnly="True"
@@ -14,7 +19,7 @@
               SelectedItem="{Binding SelectedSource, Mode=OneWayToSource}">
         <DataGrid.Columns>
             <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-            <DataGridTextColumn Header="Last Checked" Binding="{Binding LastCheckedAt}" />
+            <DataGridTextColumn Header="Last Checked" Binding="{Binding LastCheckedAt, Converter={StaticResource InstantToStringConverter}}" />
         </DataGrid.Columns>
     </DataGrid>
 </UserControl>
