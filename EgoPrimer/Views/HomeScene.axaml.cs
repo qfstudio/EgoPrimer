@@ -1,6 +1,7 @@
 ﻿using Avalonia.Interactivity;
 using Avalonia.ReactiveUI;
 using EgoPrimer.ViewModels;
+using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
 
 namespace EgoPrimer.Views;
 
@@ -64,5 +65,15 @@ public partial class HomeScene : ReactiveUserControl<HomeSceneViewModel>
     private void OpenChronicleSceneButton_OnClick(object? sender, RoutedEventArgs e)
     {
         MainView.Current?.NavigateTo(new ChronicleSceneViewModel());
+    }
+
+    private void OpenActivityRecordsSceneButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        MainView.Current?.NavigateTo(new ActivityRecordsSceneViewModel());
+    }
+
+    private void OpenHealthSceneButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        MainView.Current?.NavigateTo(new HealthSceneViewModel());
     }
 }
