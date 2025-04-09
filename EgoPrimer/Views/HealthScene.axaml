@@ -2,12 +2,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
              xmlns:vm="using:EgoPrimer.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:HealthSceneViewModel"
              x:Class="EgoPrimer.Views.HealthScene">
-    <lvc:CartesianChart
-        Series="{Binding Series}">
-    </lvc:CartesianChart>
+    <ScrollViewer>
+        <StackPanel>
+            <StackPanel Orientation="Vertical">
+                <ItemsRepeater ItemsSource="{Binding BodyWeightHighlights}">
+                    <ItemsRepeater.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" />
+                        </DataTemplate>
+                    </ItemsRepeater.ItemTemplate>
+                </ItemsRepeater>
+            </StackPanel>
+            <DataGrid>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Date" />
+                    <DataGridTextColumn Header="Weight" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

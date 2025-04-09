@@ -4,10 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:EgoPrimer.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="EgoPrimer.Views.HealthSceneToolPanel"
-             x:DataType="vm:HealthSceneViewModel">
+             x:DataType="vm:BodyWeightEditorSceneViewModel"
+             x:Class="EgoPrimer.Views.BodyWeightEditor">
     <StackPanel>
-        <Button>记录体重</Button>
-        <Button>修改记录</Button>
+        <Button>Confirm</Button>
+        <Button>Cancel</Button>
     </StackPanel>
 </UserControl>
