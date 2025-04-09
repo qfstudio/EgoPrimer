@@ -3,11 +3,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
-             xmlns:vm="using:EgoPrimer.ViewModels"
-             x:DataType="vm:HealthSceneViewModel"
-             x:Class="EgoPrimer.Views.HealthScene">
-    <lvc:CartesianChart
-        Series="{Binding Series}">
-    </lvc:CartesianChart>
+             x:Class="EgoPrimer.Views.HealthSceneToolPanel">
+    <Button>记录体重</Button>
 </UserControl>
