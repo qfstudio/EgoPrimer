@@ -75,7 +75,7 @@ public partial class SourceSceneModel : SceneModelBase
         ClearLastCheckedPropertyCommand = ReactiveCommand.Create(() =>
         {
             if (SelectedSource == null) return;
-            
+
             SelectedSource.LastCheckedAt = null;
             SelectedSource.RaisePropertyChanged(nameof(SelectedSource.LastCheckedAt));
             _coreContext.SaveChanges();
@@ -86,7 +86,7 @@ public partial class SourceSceneModel : SceneModelBase
             if (SelectedSource == null) return;
             var source = SelectedSource!;
             SelectedSource = null;
-            
+
             Sources.Remove(source);
             _coreContext.Remove(source);
             _coreContext.SaveChanges();

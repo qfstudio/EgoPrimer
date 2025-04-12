@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace EgoPrimer.Views;
 
-public partial class SourceEditorToolPanel : UserControl
+public partial class SourceEditorSceneToolPanel : UserControl
 {
-    public SourceEditorToolPanel()
+    public SourceEditorSceneToolPanel()
     {
         InitializeComponent();
     }
