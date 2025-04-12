@@ -6,7 +6,7 @@ using ReactiveUI;
 
 namespace EgoPrimer.Views;
 
-public partial class SourceScene : ReactiveUserControl<SourceSceneViewModel>
+public partial class SourceScene : ReactiveUserControl<SourceSceneModel>
 {
     public SourceScene()
     {
@@ -20,7 +20,7 @@ public partial class SourceScene : ReactiveUserControl<SourceSceneViewModel>
 
     private async Task DoEditSourceInteraction(IInteractionContext<Source?, Source?> context)
     {
-        var editor = new SourceEditorSceneViewModel
+        var editor = new SourceEditorSceneModel
         {
             Model = context.Input
         };

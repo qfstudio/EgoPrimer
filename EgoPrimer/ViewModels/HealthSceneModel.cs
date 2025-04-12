@@ -2,7 +2,7 @@
 
 namespace EgoPrimer.ViewModels;
 
-public class HealthSceneViewModel : SceneViewModelBase
+public class HealthSceneModel : SceneModelBase
 {
     public override string Name => "Health";
 
@@ -13,7 +13,7 @@ public class HealthSceneViewModel : SceneViewModelBase
         "This Month: kg"
     ];
 
-    public HealthSceneViewModel()
+    public HealthSceneModel()
     {
     }
 }

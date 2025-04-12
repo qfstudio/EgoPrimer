@@ -1,6 +1,6 @@
 ﻿namespace EgoPrimer.ViewModels;
 
-public class SettingsSceneViewModel : SceneViewModelBase
+public class SettingsSceneModel : SceneModelBase
 {
     public override string Name => "Settings";
 }

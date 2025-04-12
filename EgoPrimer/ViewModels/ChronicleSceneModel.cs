@@ -1,6 +1,6 @@
 ﻿namespace EgoPrimer.ViewModels;
 
-public class ChronicleSceneViewModel : SceneViewModelBase
+public class ChronicleSceneModel : SceneModelBase
 {
     public override string Name => "Chronicle";
 }

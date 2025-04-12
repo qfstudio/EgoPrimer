@@ -1,6 +1,6 @@
 ﻿namespace EgoPrimer.ViewModels;
 
-public class BodyWeightEditorSceneViewModel : SceneViewModelBase
+public class BodyWeightEditorSceneModel : SceneModelBase
 {
     public override string Name => "Body Weight Editor";
 }

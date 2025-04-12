@@ -1,6 +1,6 @@
 ﻿namespace EgoPrimer.ViewModels;
 
-public class WaitingSceneViewModel : SceneViewModelBase
+public class WaitingSceneModel : SceneModelBase
 {
     public override string Name => "Waiting";
 }

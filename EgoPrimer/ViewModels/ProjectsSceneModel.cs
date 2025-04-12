@@ -1,6 +1,6 @@
 ﻿namespace EgoPrimer.ViewModels;
 
-public class ProjectsSceneViewModel : SceneViewModelBase
+public class ProjectsSceneModel : SceneModelBase
 {
     public override string Name { get => "Projects"; }
 }

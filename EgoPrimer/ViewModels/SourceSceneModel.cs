@@ -15,7 +15,7 @@ using ReactiveUI.SourceGenerators;
 
 namespace EgoPrimer.ViewModels;
 
-public partial class SourceSceneViewModel : SceneViewModelBase
+public partial class SourceSceneModel : SceneModelBase
 {
     public override string Name => "Sources";
 
@@ -40,7 +40,7 @@ public partial class SourceSceneViewModel : SceneViewModelBase
 
     public ReactiveCommand<Unit, Unit> RemoveSelectedItemCommand { get; }
 
-    public SourceSceneViewModel()
+    public SourceSceneModel()
     {
         _coreContext = new CoreContext();
 

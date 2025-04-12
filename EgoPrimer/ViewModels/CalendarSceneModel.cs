@@ -2,7 +2,7 @@
 
 namespace EgoPrimer.ViewModels;
 
-public partial class CalendarSceneViewModel : SceneViewModelBase
+public partial class CalendarSceneModel : SceneModelBase
 {
     public override string Name => "Calendar";
 

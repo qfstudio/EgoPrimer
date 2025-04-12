@@ -36,20 +36,21 @@ public class SceneLocator : IDataTemplate
         return new StubScene();
     }
 
-    public virtual Type? GetCorrespondingControlType(SceneViewModelBase? vm)
+    public virtual Type? GetCorrespondingControlType(SceneModelBase? vm)
     {
         if (vm is null)
             return null;
 
+        // EgoPrimer.ViewModels.FooBarSceneModel -> EgoPrimer.Views.FooBarScene
         var name = vm.GetType().FullName!
-            .Replace("SceneViewModel", "Scene", StringComparison.Ordinal)
+            .Replace("SceneModel", "Scene", StringComparison.Ordinal)
             .Replace(".ViewModels", ".Views", StringComparison.Ordinal);
         return Type.GetType(name);
     }
     
     public Control? Build(object? data)
     {
-        if (data is not SceneViewModelBase vm)
+        if (data is not SceneModelBase vm)
             return new StubScene();
 
         var type = GetCorrespondingControlType(vm);
@@ -63,7 +64,7 @@ public class SceneLocator : IDataTemplate
 
     public bool Match(object? data)
     {
-        return data is SceneViewModelBase;
+        return data is SceneModelBase;
     }
 }
 
@@ -74,13 +75,14 @@ public class SceneToolPanelLocator : SceneLocator
         return new StubSceneToolPanel();
     }
 
-    public override Type? GetCorrespondingControlType(SceneViewModelBase? vm)
+    public override Type? GetCorrespondingControlType(SceneModelBase? vm)
     {
         if (vm is null)
             return null;
 
+        // EgoPrimer.ViewModels.FooBarSceneModel -> EgoPrimer.Views.FooBarSceneToolPanel
         var name = vm.GetType().FullName!
-            .Replace("SceneViewModel", "SceneToolPanel", StringComparison.Ordinal)
+            .Replace("SceneModel", "SceneToolPanel", StringComparison.Ordinal)
             .Replace(".ViewModels", ".Views", StringComparison.Ordinal);
         return Type.GetType(name);
     }

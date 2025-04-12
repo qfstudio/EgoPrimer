@@ -23,7 +23,7 @@ public partial class MainView : ReactiveUserControl<MainViewModel>
 
     public static MainView? Current { get; private set; }
 
-    public void NavigateTo(ISceneViewModel vm)
+    public void NavigateTo(ISceneModel vm)
     {
         if (DataContext is MainViewModel mainVm)
         {
@@ -39,7 +39,7 @@ public partial class MainView : ReactiveUserControl<MainViewModel>
         }
     }
     
-    public async Task ShowScene(ISceneViewModel vm)
+    public async Task ShowScene(ISceneModel vm)
     {
         if (DataContext is MainViewModel mainVm)
         {

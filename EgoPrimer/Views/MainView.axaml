@@ -11,7 +11,7 @@
     <Design.DataContext>
         <vm:MainViewModel>
             <x:Arguments>
-                <vm:HomeSceneViewModel />
+                <vm:HomeSceneModel />
             </x:Arguments>
         </vm:MainViewModel>
     </Design.DataContext>

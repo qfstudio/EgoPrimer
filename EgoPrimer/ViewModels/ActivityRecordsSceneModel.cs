@@ -1,6 +1,6 @@
 ﻿namespace EgoPrimer.ViewModels;
 
-public class ActivityRecordsSceneViewModel : SceneViewModelBase
+public class ActivityRecordsSceneModel : SceneModelBase
 {
     public override string Name => "Activity Records";
 }

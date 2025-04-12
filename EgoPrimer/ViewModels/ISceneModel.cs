@@ -5,16 +5,16 @@ using ReactiveUI;
 
 namespace EgoPrimer.ViewModels;
 
-public interface ISceneViewModel
+public interface ISceneModel
 {
     string Name { get; }
-    
+
     IObservable<Unit> Activated { get; }
-    
+
     IObservable<Unit> Deactivated { get; }
 }
 
-public abstract class SceneViewModelBase : ViewModelBase, ISceneViewModel, IActivatableViewModel
+public abstract class SceneModelBase : ViewModelBase, ISceneModel, IActivatableViewModel
 {
     public abstract string Name { get; }
 
@@ -26,7 +26,7 @@ public abstract class SceneViewModelBase : ViewModelBase, ISceneViewModel, IActi
     public IObservable<Unit> Activated => _activated;
     public IObservable<Unit> Deactivated => _deactivated;
     
-    protected SceneViewModelBase()
+    protected SceneModelBase()
     {
         this.WhenActivated(disposables =>
         {

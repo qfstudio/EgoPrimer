@@ -4,9 +4,9 @@ using Avalonia.Markup.Xaml;
 
 namespace EgoPrimer.Views;
 
-public partial class BodyWeightEditor : UserControl
+public partial class FocusScene : UserControl
 {
-    public BodyWeightEditor()
+    public FocusScene()
     {
         InitializeComponent();
     }

@@ -10,14 +10,14 @@ namespace EgoPrimer.ViewModels;
 
 public class MainViewModel : ViewModelBase
 {
-    public ObservableCollection<ISceneViewModel> Scenes { get; } = new();
+    public ObservableCollection<ISceneModel> Scenes { get; } = [];
 
-    private ObservableAsPropertyHelper<ISceneViewModel> _currentScene;
-    public ISceneViewModel CurrentScene => _currentScene.Value;
+    private ObservableAsPropertyHelper<ISceneModel> _currentScene;
+    public ISceneModel CurrentScene => _currentScene.Value;
 
-    public ReactiveCommand<ISceneViewModel, Unit> RequestSwitchSceneCommand { get; }
+    public ReactiveCommand<ISceneModel, Unit> RequestSwitchSceneCommand { get; }
 
-    public MainViewModel(HomeSceneViewModel homeScene)
+    public MainViewModel(HomeSceneModel homeScene)
     {
         Scenes.Add(homeScene);
         
@@ -28,10 +28,10 @@ public class MainViewModel : ViewModelBase
             .Select(_ => Scenes.Last())
             .ToProperty(this, x => x.CurrentScene, Scenes.Last());
 
-        RequestSwitchSceneCommand = ReactiveCommand.Create<ISceneViewModel>(SwitchToScene);
+        RequestSwitchSceneCommand = ReactiveCommand.Create<ISceneModel>(SwitchToScene);
     }
 
-    public void PushScene(ISceneViewModel vm)
+    public void PushScene(ISceneModel vm)
     {
         Scenes.Add(vm);
     }
@@ -43,7 +43,7 @@ public class MainViewModel : ViewModelBase
         Scenes.RemoveAt(Scenes.Count - 1);
     }
 
-    public void SwitchToScene(ISceneViewModel vm)
+    public void SwitchToScene(ISceneModel vm)
     {
         if (!Scenes.Contains(vm)) return;
 

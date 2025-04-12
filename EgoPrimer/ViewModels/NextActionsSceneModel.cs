@@ -1,6 +1,6 @@
 ﻿namespace EgoPrimer.ViewModels;
 
-public class NextActionsSceneViewModel : SceneViewModelBase
+public class NextActionsSceneModel : SceneModelBase
 {
     public override string Name { get => "Next Actions"; }
 }

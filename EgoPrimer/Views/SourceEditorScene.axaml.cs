@@ -5,7 +5,7 @@ using ReactiveUI;
 
 namespace EgoPrimer.Views;
 
-public partial class SourceEditorScene : ReactiveUserControl<SourceEditorSceneViewModel>
+public partial class SourceEditorScene : ReactiveUserControl<SourceEditorSceneModel>
 {
     public SourceEditorScene()
     {

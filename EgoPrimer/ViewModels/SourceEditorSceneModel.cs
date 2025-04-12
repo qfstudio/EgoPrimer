@@ -6,7 +6,7 @@ using ReactiveUI.SourceGenerators;
 
 namespace EgoPrimer.ViewModels;
 
-public partial class SourceEditorSceneViewModel: SceneViewModelBase
+public partial class SourceEditorSceneModel: SceneModelBase
 {
     public override string Name => "Source Editor";
     
@@ -46,7 +46,7 @@ public partial class SourceEditorSceneViewModel: SceneViewModelBase
         return _model;
     }
 
-    public SourceEditorSceneViewModel()
+    public SourceEditorSceneModel()
     {
         ConfirmEdition = ReactiveCommand.Create(() =>
         {

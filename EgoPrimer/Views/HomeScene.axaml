@@ -6,7 +6,7 @@
              xmlns:vm="clr-namespace:EgoPrimer.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="EgoPrimer.Views.HomeScene"
-             x:DataType="vm:HomeSceneViewModel">
+             x:DataType="vm:HomeSceneModel">
     <StackPanel>
         <Border>
             <StackPanel>
