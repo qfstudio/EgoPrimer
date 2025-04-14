@@ -1,14 +1,11 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using Avalonia.Threading;
 using DynamicData;
 using EgoPrimer.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using NodaTime;
 using ReactiveUI;
 using ReactiveUI.SourceGenerators;

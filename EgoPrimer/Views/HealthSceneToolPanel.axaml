@@ -7,7 +7,8 @@
              x:Class="EgoPrimer.Views.HealthSceneToolPanel"
              x:DataType="vm:HealthSceneModel">
     <StackPanel>
-        <Button>记录体重</Button>
-        <Button>修改记录</Button>
+        <Button Command="{Binding AddBodyWeightCommand}">记录体重</Button>
+        <Button Command="{Binding ModifyBodyWeightCommand}">修改记录</Button>
+        <Button Command="{Binding RemoveBodyWeightCommand}">移除记录</Button>
     </StackPanel>
 </UserControl>

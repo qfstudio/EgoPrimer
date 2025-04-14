@@ -1,4 +1,11 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
+using System.Reactive;
+using System.Reactive.Disposables;
+using System.Reactive.Linq;
+using DynamicData;
+using EgoPrimer.Entities;
+using ReactiveUI;
 
 namespace EgoPrimer.ViewModels;
 
@@ -6,14 +13,36 @@ public class HealthSceneModel : SceneModelBase
 {
     public override string Name => "Health";
 
-    public ObservableCollection<string> BodyWeightHighlights { get; } = [
-        "Latest: kg",
-        "Last 3 days: kg",
-        "This Week: kg",
-        "This Month: kg"
-    ];
+    public ObservableCollection<BodyWeight> BodyWeights { get; } = [];
+    
+    public BodyWeight? SelectedBodyWeight { set; get; }
 
+    public Interaction<BodyWeight?, BodyWeight?> EditBodyWeightInteraction { get; } = new();
+    
+    public ReactiveCommand<Unit, Unit> AddBodyWeightCommand { get; }
+    
+    public ReactiveCommand<Unit, Unit> ModifyBodyWeightCommand { get; }
+ 
+    public ReactiveCommand<Unit, Unit> RemoveBodyWeightCommand { get; }
+
+    private CoreContext _coreContext = new();
+    
     public HealthSceneModel()
     {
+        this.WhenActivated(disposables =>
+        {
+            BodyWeights.AddRange(_coreContext.BodyWeights.OrderByDescending(x => x.Date).Take(10).ToList());
+
+            Disposable.Create(() =>
+            {
+                BodyWeights.Clear();
+            }).DisposeWith(disposables);
+        });
+        
+        AddBodyWeightCommand = ReactiveCommand.CreateFromTask(async () =>
+        {
+            var bodyWeight = await EditBodyWeightInteraction.Handle(null);
+            if (bodyWeight == null) return;
+        });
     }
 }
