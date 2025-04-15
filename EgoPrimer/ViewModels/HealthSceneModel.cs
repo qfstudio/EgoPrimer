@@ -43,6 +43,28 @@ public class HealthSceneModel : SceneModelBase
         {
             var bodyWeight = await EditBodyWeightInteraction.Handle(null);
             if (bodyWeight == null) return;
+
+            _coreContext.Add(bodyWeight);
+            await _coreContext.SaveChangesAsync();
+        });
+
+        ModifyBodyWeightCommand = ReactiveCommand.CreateFromTask(async () =>
+        {
+            var bodyWeight = await EditBodyWeightInteraction.Handle(SelectedBodyWeight);
+            if (bodyWeight == null) return;
+
+            _coreContext.Update(bodyWeight);
+            await _coreContext.SaveChangesAsync();
+        });
+
+        RemoveBodyWeightCommand = ReactiveCommand.CreateFromTask(async () =>
+        {
+            if (SelectedBodyWeight == null) return;
+
+            var bodyWeight = SelectedBodyWeight;
+            BodyWeights.Remove(bodyWeight);
+            _coreContext.Remove(bodyWeight);
+            await _coreContext.SaveChangesAsync();
         });
     }
 }

@@ -11,8 +11,7 @@
               ItemsSource="{Binding Sources}"
               IsReadOnly="True"
               CanUserSortColumns="True"
-              SelectionMode="Single"
-              SelectedItem="{Binding SelectedSource, Mode=OneWayToSource}">
+              SelectionMode="Single">
         <DataGrid.Columns>
             <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
             <DataGridTextColumn Header="Last Checked" Binding="{Binding LastCheckedAt, Converter={StaticResource InstantToStringConverter}}" />
