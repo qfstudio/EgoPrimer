@@ -6,12 +6,13 @@
 dotnet workload install android wasm-tools
 ```
 
-## 基本结构
+## 发布
 
-- `Thoughts` 随时随地产生的想法
-- `ActivityRecord` 具有明确起止时间的活动记录
-- `Goal` 目标
+``` shell
+cd EgoPrimer.Desktop
+dotnet publish -c Release -r win-x64
 
-## Publish
-
-- `dotnet publish -c Release -r win-x64`
+# itch.io
+cd bin/Release/net9.0/win-x64
+butler push . lightyears1998/ego-primer:windows
+```
