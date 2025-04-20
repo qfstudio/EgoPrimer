@@ -73,7 +73,7 @@
             </TabItem>
         </TabControl>
 
-        <Border>
+        <Border Margin="12, 20">
             <StackPanel>
                 <Button Name="OpenSettingsSceneButton" Click="OpenSettingsSceneButton_OnClick">Settings</Button>
             </StackPanel>

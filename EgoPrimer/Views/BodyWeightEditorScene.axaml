@@ -7,7 +7,17 @@
              x:DataType="vm:BodyWeightEditorSceneModel"
              x:Class="EgoPrimer.Views.BodyWeightEditorScene">
     <StackPanel>
-        <Button>Confirm</Button>
-        <Button>Cancel</Button>
+        <Label>Date: </Label>
+        <DatePicker></DatePicker>
+        <TimePicker></TimePicker>
+        <StackPanel Orientation="Horizontal">
+            <Label>Weight: </Label>
+            <NumericUpDown MinWidth="200" Increment="0.1"></NumericUpDown>
+            <Label>kg</Label>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Button Command="{Binding ConfirmEdition}">Confirm</Button>
+            <Button Command="{Binding DiscardEdition}">Cancel</Button>
+        </StackPanel>
     </StackPanel>
 </UserControl>
