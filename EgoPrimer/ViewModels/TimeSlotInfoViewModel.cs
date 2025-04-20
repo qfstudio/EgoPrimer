@@ -1,4 +1,5 @@
 ﻿using EgoPrimer.Services;
+using NodaTime.Calendars;
 
 namespace EgoPrimer.ViewModels;
 
@@ -8,9 +9,10 @@ public class TimeSlotInfoViewModel : ViewModelBase
 
     public TimeSlotInfoViewModel()
     {
-        var today = ChronicleService.GetToday();
-        var weekYear = ChronicleService.GetCurrentWeekOfWeekYear();
+        var today = ChronicleService.GetToday().LocalDateTime.Date;
+        var weekYear = WeekYearRules.Iso.GetWeekYear(today);
+        var week = WeekYearRules.Iso.GetWeekOfWeekYear(today);
 
-        TextInfo = $"{today.Year}年第{weekYear}周";
+        TextInfo = $"{weekYear}年第{week}周";
     }
 }

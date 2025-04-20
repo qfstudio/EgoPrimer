@@ -12,11 +12,4 @@ public class ChronicleService
         var zonedDateTime = now.InZone(zone);
         return zonedDateTime;
     }
-
-    public static int GetCurrentWeekOfWeekYear()
-    {
-        var zonedDateTime = GetToday();
-        var localDate = zonedDateTime.LocalDateTime.Date;
-        return WeekYearRules.Iso.GetWeekOfWeekYear(localDate);
-    }
 }
