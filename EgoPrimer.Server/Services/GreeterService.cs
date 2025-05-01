@@ -1,5 +1,5 @@
 using Grpc.Core;
-using EgoPrimer.Server;
+using EgoPrimer.Shared;
 
 namespace EgoPrimer.Server.Services;
 

@@ -1,8 +1,6 @@
 syntax = "proto3";
 
-option csharp_namespace = "EgoPrimer.Server";
-
-package greet;
+package EgoPrimer.Shared;
 
 // The greeting service definition.
 service Greeter {
