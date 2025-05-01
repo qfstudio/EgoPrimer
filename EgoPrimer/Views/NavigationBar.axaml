@@ -8,19 +8,21 @@
              x:Class="EgoPrimer.Views.NavigationBar"
              x:DataType="vm:MainViewModel">
     <Grid Background="Aquamarine">
-        <ItemsRepeater ItemsSource="{Binding Scenes}">
-            <ItemsRepeater.Layout>
-                <StackLayout Spacing="10" Orientation="Horizontal"></StackLayout>
-            </ItemsRepeater.Layout>
+        <ItemsControl ItemsSource="{Binding Scenes}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Spacing="10" Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
             
-            <ItemsRepeater.ItemTemplate>
+            <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Button Content="{Binding Name}"
                             Command="{ReflectionBinding DataContext.RequestSwitchSceneCommand,
                             RelativeSource={RelativeSource AncestorType=views:NavigationBar}}"
                             CommandParameter="{Binding }" />
                 </DataTemplate>
-            </ItemsRepeater.ItemTemplate>
-        </ItemsRepeater>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </UserControl>

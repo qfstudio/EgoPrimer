@@ -12,7 +12,7 @@
     <AcceptAndroidSDKLicenses>true</AcceptAndroidSDKLicenses>
   </PropertyGroup>
   
-  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <!-- Use an alternative Android package name for debug builds. -->
     <ApplicationId>net.qfstudio.ego_primer.dev</ApplicationId>
   </PropertyGroup>
