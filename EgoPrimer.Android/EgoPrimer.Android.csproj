@@ -9,6 +9,12 @@
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <AndroidPackageFormat>apk</AndroidPackageFormat>
     <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+    <AcceptAndroidSDKLicenses>true</AcceptAndroidSDKLicenses>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <!-- Use an alternative Android package name for debug builds. -->
+    <ApplicationId>net.qfstudio.ego_primer.dev</ApplicationId>
   </PropertyGroup>
 
   <ItemGroup>
