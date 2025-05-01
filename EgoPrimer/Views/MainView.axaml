@@ -20,14 +20,17 @@
         <Grid.RowDefinitions>Auto,*</Grid.RowDefinitions>
         <Grid.ColumnDefinitions>*,Auto</Grid.ColumnDefinitions>
 
+        <!-- Navigation bar -->
         <views:NavigationBar Grid.Row="0" Grid.Column="0" Name="Navigation"></views:NavigationBar>
-            
+
+        <!-- Main content area -->
         <ContentControl Grid.Row="1" Grid.Column="0" Name="Screen" Content="{Binding CurrentScene}">
             <ContentControl.DataTemplates>
                 <local:SceneLocator />
             </ContentControl.DataTemplates>
         </ContentControl>
 
+        <!-- Tool panel -->
         <ContentControl 
             Name="ToolPanel"
             Grid.Row="0"

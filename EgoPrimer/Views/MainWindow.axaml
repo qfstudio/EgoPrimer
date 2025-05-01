@@ -8,7 +8,7 @@
         x:Class="EgoPrimer.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="{Binding Title}"
-        Width="540"
+        Width="600"
         Height="360"
         x:DataType="vm:MainWindowViewModel">
 
