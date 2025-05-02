@@ -6,6 +6,11 @@
 dotnet workload install android wasm-tools
 ```
 
+``` shell
+# asp dotnet
+dotnet dev-certs https --trust
+```
+
 ## 发布
 
 ``` shell
